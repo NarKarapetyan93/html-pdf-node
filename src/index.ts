@@ -3,11 +3,11 @@ import Handlebars from 'handlebars';
 import inlineCss from 'inline-css';
 import { CallbackFunction, FileInput, PdfOutput } from './types';
 
-export { PDFOptions } from 'puppeteer';
+export interface PdfOptions extends PDFOptions {}
 
 export const generatePdf = async (
   file: FileInput,
-  options: PDFOptions,
+  options: PdfOptions,
   callback?: CallbackFunction
 ): Promise<Buffer> => {
 
@@ -59,7 +59,7 @@ export const generatePdf = async (
 
 export const generatePdfs = async (
   files: FileInput[],
-  options: PDFOptions,
+  options: PdfOptions,
   callback?: CallbackFunction
 ): Promise<PdfOutput[]> => {
 

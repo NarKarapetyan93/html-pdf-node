@@ -1,39 +1,57 @@
 {
-  "name": "html-pdf-node",
+  "name": "@logismiko/html-pdf",
   "version": "1.0.7",
   "description": "Convert any html content or html page to PDF",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "directories": {
     "test": "tests"
   },
   "scripts": {
-    "test": "mocha tests/*.js -R spec --ui bdd --timeout 5000"
+    "build": "tsc",
+    "prepare": "npm run build",
+    "test": "npm run build && mocha dist/tests/**/*.js -R spec --ui bdd --timeout 5000",
+    "lint": "eslint . --ext .ts",
+    "type-check": "tsc --noEmit"
   },
-  "author": "mrafiqk",
+  "author": "Logismiko",
   "license": "ISC",
   "dependencies": {
-    "bluebird": "^3.7.2",
-    "handlebars": "^4.7.6",
-    "inline-css": "^3.0.0",
-    "puppeteer": "^10.4.0"
+    "handlebars": "^4.7.8",
+    "inline-css": "^4.0.3",
+    "puppeteer": "^24.1.1"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^8.0.1"
+    "@types/chai": "^4.3.11",
+    "@types/handlebars": "^4.1.0",
+    "@types/inline-css": "^3.0.3",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.11.0",
+    "@typescript-eslint/eslint-plugin": "^6.18.1",
+    "@typescript-eslint/parser": "^6.18.1",
+    "chai": "^5.1.2",
+    "eslint": "^8.56.0",
+    "mocha": "^11.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
   },
   "keywords": [
     "html",
     "pdf",
     "nodejs",
     "puppeteer",
-    "handlebars"
+    "handlebars",
+    "typescript"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mrafiqk/html-pdf-node.git"
+    "url": "git+https://github.com/NarKarapetyan93/html-pdf-node"
   },
   "bugs": {
-    "url": "https://github.com/mrafiqk/html-pdf-node/issues"
+    "url": "https://github.com/NarKarapetyan93/html-pdf-node/issues"
   },
-  "homepage": "https://github.com/mrafiqk/html-pdf-node#readme"
+  "homepage": "https://github.com/NarKarapetyan93/html-pdf-node#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  }
 }

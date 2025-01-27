@@ -1,7 +1,7 @@
 import puppeteer, { Browser, Page, PDFOptions } from 'puppeteer';
 import Handlebars from 'handlebars';
 import inlineCss from 'inline-css';
-import { CallbackFunction, FileInput, PdfOutput } from './types';
+import { CallbackFunction, FileInput } from './types';
 
 export interface PdfOptions extends PDFOptions {}
 
@@ -12,9 +12,16 @@ export const generatePdf = async (
 ): Promise<Buffer> => {
 
   const browser: Browser = await puppeteer.launch({
+    headless: true,
     args: [
       '--no-sandbox',
       '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-accelerated-2d-canvas',
+      '--no-first-run',
+      '--no-zygote',
+      '--single-process',
+      '--disable-gpu'
     ]
   });
   
@@ -22,7 +29,6 @@ export const generatePdf = async (
 
   if (file.content) {
     const data = await inlineCss(file.content, { url: "/" });
-    console.log("Compiling the template with handlebars");
     
     const template = Handlebars.compile(data, { strict: true });
     const result = template(data);
@@ -51,68 +57,7 @@ export const generatePdf = async (
   } catch (err) {
     if (callback) {
       callback(err as Error);
-      return Buffer.from([]); // Return empty buffer when using callback
-    }
-    throw err;
-  }
-};
-
-export const generatePdfs = async (
-  files: FileInput[],
-  options: PDFOptions,
-  callback?: CallbackFunction
-): Promise<PdfOutput[]> => {
-
-  const browser: Browser = await puppeteer.launch({
-    args: [
-      '--no-sandbox',
-      '--disable-setuid-sandbox',
-    ]
-  });
-
-  const pdfs: PdfOutput[] = [];
-  const page: Page = await browser.newPage();
-
-  try {
-    for (const file of files) {
-      if (file.content) {
-        const data = await inlineCss(file.content, { url: "/" });
-        console.log("Compiling the template with handlebars");
-        
-        const template = Handlebars.compile(data, { strict: true });
-        const result = template(data);
-        const html = result;
-        
-        await page.setContent(html, {
-          waitUntil: 'networkidle0',
-        });
-      } else if (file.url) {
-        await page.goto(file.url, {
-          waitUntil: 'networkidle0',
-        });
-      } else {
-        throw new Error('Either content or url must be provided');
-      }
-
-      const pdfBuffer = await page.pdf(options);
-      const pdfObj: PdfOutput = {
-        ...file,
-        buffer: Buffer.from(Object.values(pdfBuffer))
-      };
-      delete pdfObj.content;
-      pdfs.push(pdfObj);
-    }
-
-    await browser.close();
-    
-    if (callback) {
-      callback(null, pdfs);
-    }
-    return pdfs;
-  } catch (err) {
-    if (callback) {
-      callback(err as Error);
-      return []; // Return empty array when using callback
+      return Buffer.from([]);
     }
     throw err;
   }

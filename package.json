@@ -1,16 +1,16 @@
 {
   "name": "@logismiko/html-pdf",
-  "version": "1.0.7",
+  "version": "1.0.0",
   "description": "Convert any html content or html page to PDF",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
   "directories": {
     "test": "tests"
   },
   "scripts": {
     "build": "tsc",
     "prepare": "npm run build",
-    "test": "npm run build && mocha dist/tests/**/*.js -R spec --ui bdd --timeout 5000",
+    "test": "mocha -r ts-node/register tests/*.ts -R spec --ui bdd --timeout 5000",
     "lint": "eslint . --ext .ts",
     "type-check": "tsc --noEmit"
   },
@@ -45,7 +45,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NarKarapetyan93/html-pdf-node"
+    "url": "git+https://github.com/NarKarapetyan93/html-pdf-node.git"
   },
   "bugs": {
     "url": "https://github.com/NarKarapetyan93/html-pdf-node/issues"

@@ -5,7 +5,7 @@
       "lib": ["ES2018", "DOM"],
       "declaration": true,
       "outDir": "./dist",
-      "rootDir": "./src",
+      "rootDir": ".",
       "strict": true,
       "esModuleInterop": true,
       "skipLibCheck": true,
@@ -15,8 +15,5 @@
       "sourceMap": true
     },
     "include": ["src/**/*"],
-    "exclude": ["node_modules", "dist"],
-    "ts-node": {
-      "files": true
-    }
-  }
+    "exclude": ["node_modules", "dist"]
+}

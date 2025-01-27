@@ -1,18 +1,8 @@
 import puppeteer, { Browser, Page, PDFOptions } from 'puppeteer';
 import Handlebars from 'handlebars';
 import inlineCss from 'inline-css';
+import { CallbackFunction, FileInput, PdfOutput } from './types';
 
-interface FileInput {
-  content?: string;
-  url?: string;
-  [key: string]: unknown;
-}
-
-interface PdfOutput extends Omit<FileInput, 'content'> {
-  buffer: Buffer;
-}
-
-type CallbackFunction = (error: Error | null, result?: Buffer | PdfOutput[]) => void;
 
 export const generatePdf = async (
   file: FileInput,

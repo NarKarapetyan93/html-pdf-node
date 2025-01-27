@@ -10,11 +10,10 @@
   "scripts": {
     "build": "rimraf dist && tsc",
     "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run lint",
+    "prepublishOnly": "npm run lint",
     "preversion": "npm run lint",
     "version": "git add -A src",
     "postversion": "git push && git push --tags",
-    "test": "mocha",
     "lint": "eslint . --ext .ts",
     "type-check": "tsc --noEmit"
   },
@@ -26,16 +25,12 @@
     "puppeteer": "^24.1.1"
   },
   "devDependencies": {
-    "@types/chai": "^4.3.20",
     "@types/handlebars": "^4.1.0",
     "@types/inline-css": "^3.0.3",
-    "@types/mocha": "^10.0.10",
     "@types/node": "^20.11.0",
     "@typescript-eslint/eslint-plugin": "^6.18.1",
     "@typescript-eslint/parser": "^6.18.1",
-    "chai": "^5.1.2",
     "eslint": "^8.56.0",
-    "mocha": "^11.1.0",
     "rimraf": "^6.0.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3"

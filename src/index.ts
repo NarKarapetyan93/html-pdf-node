@@ -3,6 +3,7 @@ import Handlebars from 'handlebars';
 import inlineCss from 'inline-css';
 import { CallbackFunction, FileInput, PdfOutput } from './types';
 
+export { PDFOptions } from 'puppeteer';
 
 export const generatePdf = async (
   file: FileInput,

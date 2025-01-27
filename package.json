@@ -1,6 +1,6 @@
 {
   "name": "@logismiko/html-pdf",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Convert any html content or html page to PDF",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",

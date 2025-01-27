@@ -1,6 +1,6 @@
 {
   "name": "@logismiko/html-pdf",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Convert any html content or html page to PDF",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
@@ -8,9 +8,13 @@
     "test": "tests"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "rimraf dist && tsc",
     "prepare": "npm run build",
-    "test": "mocha -r ts-node/register tests/*.ts -R spec --ui bdd --timeout 5000",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "git add -A src",
+    "postversion": "git push && git push --tags",
+    "test": "mocha",
     "lint": "eslint . --ext .ts",
     "type-check": "tsc --noEmit"
   },
@@ -22,16 +26,17 @@
     "puppeteer": "^24.1.1"
   },
   "devDependencies": {
-    "@types/chai": "^4.3.11",
+    "@types/chai": "^4.3.20",
     "@types/handlebars": "^4.1.0",
     "@types/inline-css": "^3.0.3",
-    "@types/mocha": "^10.0.6",
+    "@types/mocha": "^10.0.10",
     "@types/node": "^20.11.0",
     "@typescript-eslint/eslint-plugin": "^6.18.1",
     "@typescript-eslint/parser": "^6.18.1",
     "chai": "^5.1.2",
     "eslint": "^8.56.0",
     "mocha": "^11.1.0",
+    "rimraf": "^6.0.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
   },

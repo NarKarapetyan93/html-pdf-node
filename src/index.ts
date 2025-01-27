@@ -7,7 +7,7 @@ export interface PdfOptions extends PDFOptions {}
 
 export const generatePdf = async (
   file: FileInput,
-  options: PdfOptions,
+  options: PDFOptions,
   callback?: CallbackFunction
 ): Promise<Buffer> => {
 
@@ -59,7 +59,7 @@ export const generatePdf = async (
 
 export const generatePdfs = async (
   files: FileInput[],
-  options: PdfOptions,
+  options: PDFOptions,
   callback?: CallbackFunction
 ): Promise<PdfOutput[]> => {
 

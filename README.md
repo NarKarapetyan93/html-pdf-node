@@ -11,7 +11,7 @@ npm install @logismiko/html-pdf
 ## Usage
 
 ```typescript
-import { generatePdf, generatePdfs } from '@logismiko/html-pdf';
+import { generatePdf } from '@logismiko/html-pdf';
 
 // Generate single PDF
 const file = { content: "Welcome" };
@@ -33,17 +33,6 @@ generatePdf(file, options, (err, pdfBuffer) => {
       return;
     }
     console.log("PDF Buffer:-", pdfBuffer);
-  });
-
-// Generate multiple PDFs
-const files = [
-  { content: "Welcome" },
-  { url: "https://example.com" }
-];
-
-generatePdfs(files, options)
-  .then(pdfs => {
-    console.log("PDF Buffers:-", pdfs);
   });
 ```
 
